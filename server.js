@@ -23,16 +23,16 @@ app.get("/", (req, res) => {
 
 let words = [];
 
-// Створення схеми для слова з асоціаціями
+
 const wordSchema = new mongoose.Schema({
   word: String,
   associations: [String], // Масив асоціацій для кожного слова
 });
 
-// Модель для слова
+
 const Word = mongoose.model("Word", wordSchema);
 
-// Підключення до бази даних
+
 mongoose
   .connect(
     "mongodb+srv://Zhovtovatiuk:12345@cluster0.fjkkmek.mongodb.net/Codenames",
@@ -47,18 +47,17 @@ mongoose
   })
   .catch((err) => console.error("Помилка підключення до бази даних:", err));
 
-// Оновлення списку слів
+
 async function updateWords() {
   try {
-    // Отримання всіх слів з бази даних
     const wordsFromDB = await Word.find({});
 
-    // Формування масиву слів з асоціаціями
+
     words = wordsFromDB.map((wordObj) => ({
       word: wordObj.word,
       associations: wordObj.associations,
     }));
-    // Використання масиву слів для подальшої роботи
+
   } catch (error) {
     console.error("Помилка при отриманні слів з бази даних:", error);
   }
@@ -77,7 +76,7 @@ const shuffleArray = (array) => {
   return newArray;
 };
 
-// Добавьте это состояние где-то выше в вашем коде, чтобы хранить предыдущие ассоциации
+
 let previousAssociations = new Set();
 
 function selectAssociation(activeTeam) {
@@ -86,7 +85,7 @@ function selectAssociation(activeTeam) {
     (word) => word.guessed === false && word.color === currentTeam
   );
 
-  // Словарь для подсчета частот ассоциаций
+
   let associationFrequency = {};
 
   unguessedWords.forEach((wordObj) => {
@@ -99,7 +98,7 @@ function selectAssociation(activeTeam) {
     });
   });
 
-  // Найти самую частую ассоциацию, которая не была использована ранее
+
   let maxFrequency = 0;
   let bestAssociation = null;
 
@@ -113,7 +112,7 @@ function selectAssociation(activeTeam) {
     }
   }
 
-  // Если нет частых ассоциаций, выбрать первую ассоциацию из первого неотгаданного слова
+
   if (!bestAssociation && unguessedWords.length > 0) {
     for (let wordObj of unguessedWords) {
       for (let assoc of wordObj.word.associations) {
@@ -126,7 +125,7 @@ function selectAssociation(activeTeam) {
     }
   }
 
-  // Если так и не нашлось новой ассоциации, возможно стоит пересмотреть стратегию или начинать с чистого листа
+
   if (!bestAssociation) {
     previousAssociations.clear();
     bestAssociation = unguessedWords[0].word.associations[0];
@@ -149,7 +148,7 @@ function generateColoredWords(
   const coloredWords = [];
   const wordColors = [];
 
-  // Генерируем индексы для синих слов
+
   for (let i = 0; i < blueCount; i++) {
     let index;
     do {
@@ -158,7 +157,7 @@ function generateColoredWords(
     wordColors[index] = "blue";
   }
 
-  // Генерируем индексы для красных слов
+
   for (let i = 0; i < redCount; i++) {
     let index;
     do {
@@ -167,7 +166,7 @@ function generateColoredWords(
     wordColors[index] = "red";
   }
 
-  // Генерируем индексы для белых слов
+
   for (let i = 0; i < whiteCount; i++) {
     let index;
     do {
@@ -176,7 +175,7 @@ function generateColoredWords(
     wordColors[index] = "white";
   }
 
-  // Генерируем индексы для черных слов
+  
   for (let i = 0; i < blackCount; i++) {
     let index;
     do {
@@ -185,7 +184,7 @@ function generateColoredWords(
     wordColors[index] = "black";
   }
 
-  // Заполняем массив coloredWords цветными словами
+ 
   for (let i = 0; i < words.length; i++) {
     coloredWords.push({
       word: words[i],
