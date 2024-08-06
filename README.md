@@ -1,70 +1,73 @@
-# Getting Started with Create React App
+# Web Codenames
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Web Codenames is a web-based implementation of the popular board game "Codenames." The game allows players to form two teams and compete to guess words based on their associations. This project aims to provide a fun and interactive platform for playing Codenames online with friends.
 
-## Available Scripts
+## Table of Contents
 
-In the project directory, you can run:
+- [Features](#features)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Gameplay](#gameplay)
 
-### `npm start`
+## Features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- Two teams: Red and Blue.
+- Real-time gameplay with Socket.IO.
+- Player roles: Master and Player.
+- Bot Masters for single-player or practice sessions.
+- Word associations to guide players in guessing.
+- Timer to keep the game pace.
+- Game state persistence.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Installation
 
-### `npm test`
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/RofLANi4/Web-Codenames.git
+   ```
+2. Navigate to the project directory:
+   ```bash
+   cd Web-Codenames
+   ```
+3. Install the dependencies
+   ```bash
+   npm install
+   ```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Usage
 
-### `npm run build`
+1. Start the server:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+   ```bash
+   node server.js
+   ```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+2. In a separate terminal, start the React development server:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+   ```bash
+   npm start
+   ```
 
-### `npm run eject`
+3. Open your web browser and navigate to http://localhost:3000.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Gameplay
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Starting the Game
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+1. Join a team by clicking on the respective buttons: "Join Red Master", "Join Blue Master", "Join Red Player", or "Join Blue Player".
+2. Once all players have joined, click the "Start Game" button.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Playing the Game
 
-## Learn More
+- Masters: Provide associations for the words on the board.
+- Players: Guess the words based on the associations provided by the master.
+- Bot Masters: Automatically provide associations based on the remaining unguessed words.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Word Selection
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- Click on a word to select it. If you are a player, your team must collectively select the word to guess it.
+- The game tracks the number of votes for each word and reveals the word when the required number of votes is reached.
 
-### Code Splitting
+### Timer
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- The timer keeps track of the game time. Ensure your team guesses words before the time runs out.
